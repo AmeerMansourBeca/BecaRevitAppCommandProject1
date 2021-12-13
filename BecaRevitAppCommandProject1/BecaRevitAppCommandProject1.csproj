@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+      None
+    </ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <!-- setting revit verision property -->
+  <PropertyGroup Condition="$(Configuration.Contains('2014'))">
+    <TargetYear>2014</TargetYear>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('2015'))">
+    <TargetYear>2015</TargetYear>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('2016'))">
+    <TargetYear>2016</TargetYear>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('2017'))">
+    <TargetYear>2017</TargetYear>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('2018'))">
+    <TargetYear>2018</TargetYear>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('2019'))">
+    <TargetYear>2019</TargetYear>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('2020'))">
+    <TargetYear>2020</TargetYear>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('2021'))">
+    <TargetYear>2021</TargetYear>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('2022'))">
+    <TargetYear>2022</TargetYear>
+  </PropertyGroup>
+  <!-- setting debug / release configs -->
+  <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\$(TargetYear)</OutputPath>
+    <DefineConstants>DEBUG;TRACE;TargetYear$(TargetYear)</DefineConstants>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('Release'))">
+    <OutputPath>bin\Release\$(TargetYear)</OutputPath>
+    <DefineConstants>TRACE;TargetYear$(TargetYear)</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+  <!-- common Configs for Release & debug -->
+  <PropertyGroup>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <TargetFrameworkVersion Condition=" '$(TargetYear)' == '2014' ">v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetYear)' == '2015' ">v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetYear)' == '2016' ">v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetYear)' == '2017' ">v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetYear)' == '2018' ">v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetYear)' == '2019' ">v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetYear)' == '2020' ">v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetYear)' == '2021' ">v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetYear)' == '2022' ">v4.8</TargetFrameworkVersion>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <!-- these following values are being set directly in Beca.Revit.AppCommands.csproj.user file  -->
+    <!-- <StartAction>Program</StartAction> -->
+    <!-- <StartProgram>$(ProgramW6432)\Autodesk\Revit $(TargetYear)\Revit.exe</StartProgram>  -->
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug 2019</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C9673EB-ED0D-4634-B11D-AE1C70545950}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BecaRevitAppCommandProject1</RootNamespace>
+    <AssemblyName>BecaRevitAppCommandProject1</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="RevitAPI">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit $(TargetYear)\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit $(TargetYear)\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TabNameTabApp_NEEDTOBECHANGED.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\RibbonUI.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BecaRevitAddin_TabName_NEEDTOBECHANGED.addin" />
+    <Content Include="ReedMeToUse.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if not exist "$(AppData)\Autodesk\REVIT\Addins\$(TargetYear)\Beca" mkdir "$(AppData)\Autodesk\REVIT\Addins\$(TargetYear)\Beca"
+	copy "$(ProjectDir)$(OutputPath)*.dll" "$(AppData)\Autodesk\REVIT\Addins\$(TargetYear)\Beca"
+      if exist "$(AppData)\Autodesk\REVIT\Addins\$(TargetYear)" copy "$(ProjectDir)*.addin" "$(AppData)\Autodesk\REVIT\Addins\$(TargetYear)"
+      
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="AfterClean">
+    <Delete Files="$(AppData)\Autodesk\REVIT\Addins\$(TargetYear)\**Changeable***.addin" />
+    <RemoveDir Directories="$(AppData)\Autodesk\REVIT\Addins\$(TargetYear)\Beca\$(TargetFileName)" />
+  </Target>
+</Project>

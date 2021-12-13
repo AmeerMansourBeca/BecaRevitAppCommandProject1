@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>BecaRevitAppCommandProject1</Name>
+    <Assembly>Beca\Beca.Revit.AppCommands.MEPTab.dll</Assembly>
+    <FullClassName>BecaRevitAppCommandProject1.TabNameTabApp_NEEDTOBECHANGED</FullClassName>
+    <ClientId>F5814F57-485F-4CCA-A41B-2B9D2091241B</ClientId> 
+    <VendorId>Beca</VendorId>
+    <VendorDescription>www.Beca.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

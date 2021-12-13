@@ -1,0 +1,4 @@
+you will need to update Beca.Revit.AppCommands.BecaEmptyNotAddedTemplate.csproj as textfile and change **Changeable*** to your addin file name
+add shared assembly file
+exculde csproj.user file
+restart Visual Studio
